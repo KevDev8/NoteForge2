@@ -46,7 +46,7 @@ const ALLOWEDREQUESTS = {
 };
 
 
-const PORT = 4000; // Temporary, replace later with whatever Render needs
+const process.env.PORT || 4000;
 
 
 async function requestStyle(req, res) {
