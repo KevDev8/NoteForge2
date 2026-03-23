@@ -1,0 +1,51 @@
+#pricing {
+    background: #0a1830;
+    color: white;
+}
+
+#pricing .grid-container {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    align-items: start;
+}
+
+#pricing-title {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+#pricing-title button { width: 120px; }
+
+.plan {
+    background-color: #1e293b;
+    border-radius: 25px;
+    display: flex;
+    flex-direction: column;
+    min-width: 400px;
+    max-width: 400px;
+}
+
+.plan-title {
+    padding: 1.5rem;
+    border-radius: 25px 25px 0px 0px;
+    background-color: #536b99;
+}
+
+.plan-title h4 { color: rgb(214, 214, 214); }
+
+.plan-description {
+    display: flex;
+    height: 100%;
+    padding: 1.5rem;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.plan-features ul {
+    padding-left: 1.2rem;
+}
+
+.plan-description button { margin-top: auto; }
+
+.commercial .plan-title{ color: rgb(88, 207, 52); }

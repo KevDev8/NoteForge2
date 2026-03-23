@@ -1,0 +1,31 @@
+#features {
+    background-color: #1a345e;
+    color: white;
+}
+
+#features .grid-container {
+    gap: 2rem;
+    text-align: center;
+}
+
+.card {
+    max-width: 450px;
+    background-color: #1e293b;
+    border-radius: 25px;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.card-image img {
+    width: 100%;
+    display: block;
+    border-radius: 25px;
+}
+
+.card-content {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}

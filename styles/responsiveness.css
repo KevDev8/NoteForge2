@@ -1,0 +1,26 @@
+@media (max-width: 800px) {
+    nav { grid-template-columns: 1fr auto; }
+    #desktop-nav { display: none; }
+    .mobile-only { display: block; }
+
+    .flex-container { flex-direction: column; }
+    .flex-card { 
+        min-width: none;
+        max-width: none;
+    }
+
+    #get-started .grid-container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        text-align: center;
+    }
+
+    #get-started-description {
+        text-align: center;
+        align-items: center;
+    }
+
+    #pricing .grid-container { grid-template-columns: 1fr; }
+
+    .comment { text-align: center; }
+}
