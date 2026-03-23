@@ -49,7 +49,7 @@ const ALLOWEDREQUESTS = {
 const process.env.PORT || 4000;
 
 
-async function requestStyle(req, res) {
+function requestStyle(req, res) {
     console.log(`Requested Style:  ${req.url}`);
 
     const filePath = path.join(STYLES, req.url);
@@ -65,7 +65,7 @@ async function requestStyle(req, res) {
 };
 
 
-async function requestScript(req, res) {
+function requestScript(req, res) {
     console.log(`Requested Script: ${req.url}`);
 
     const filePath = path.join(SCRIPTS, req.url);
@@ -97,7 +97,7 @@ async function requestData(req, res) {
 }
 
 
-async function requestImage(req, res) {
+function requestImage(req, res) {
     console.log(`Requested Image:  ${req.url}`)
 
     const filePath = path.join(IMAGES, req.url);
@@ -108,7 +108,7 @@ async function requestImage(req, res) {
 }
 
 
-async function requestPage(req, res) {
+function requestPage(req, res) {
     console.log(`Requested Page:   ${req.url}`);
 
     const filePath = path.join(PAGES, (req.url === "/") ? "index.html" : `${req.url}.html`);
@@ -124,12 +124,12 @@ async function requestPage(req, res) {
 };
 
 
-const server = http.createServer(async (req, res) => {
+const server = http.createServer((req, res) => {
     // Easier to add many new files/requests in the future if I have to 
-    if (ALLOWEDREQUESTS.STYLES.includes(req.url)) { await requestStyle(req, res); }
-    else if (ALLOWEDREQUESTS.SCRIPTS.includes(req.url)) { await requestScript(req, res); }
-    else if (ALLOWEDREQUESTS.IMAGES.includes(req.url)) { await requestImage(req, res); }
-    else if (ALLOWEDREQUESTS.DATA.includes(req.url)) { await requestData(req, res); }
-    else if (ALLOWEDREQUESTS.PAGES.includes(req.url)) { await requestPage(req, res); }
+    if (ALLOWEDREQUESTS.STYLES.includes(req.url)) { requestStyle(req, res); }
+    else if (ALLOWEDREQUESTS.SCRIPTS.includes(req.url)) { requestScript(req, res); }
+    else if (ALLOWEDREQUESTS.IMAGES.includes(req.url)) { requestImage(req, res); }
+    else if (ALLOWEDREQUESTS.DATA.includes(req.url)) { requestData(req, res); }
+    else if (ALLOWEDREQUESTS.PAGES.includes(req.url)) { requestPage(req, res); }
 });
 server.listen(PORT);
