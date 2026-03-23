@@ -8,6 +8,7 @@
         min-width: none;
         max-width: none;
     }
+    .plan { min-width: none; }
 
     #get-started .grid-container {
         grid-template-columns: 1fr;
