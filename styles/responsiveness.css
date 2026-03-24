@@ -5,10 +5,10 @@
 
     .flex-container { flex-direction: column; }
     .flex-card { 
-        min-width: none;
-        max-width: none;
+        min-width: unset;
+        max-width: unset;
     }
-    .plan { min-width: 0; }
+    .plan { min-width: unset; }
 
     #get-started .grid-container {
         grid-template-columns: 1fr;
