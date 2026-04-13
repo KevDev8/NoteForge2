@@ -1,7 +1,26 @@
+// https://noteforge2.onrender.com/
+
 import http from "http";
 import fs from "fs";
 import path from "path";
+import { MongoClient } from "mongodb";
 
+// Set up MongoDB client
+const uri = "mongodb+srv://kevin:garcia@noteforgedb.nxjxdg7.mongodb.net/?appName=NoteForgeDB"
+const client = new MongoClient(uri); // Set up MongoDB Client
+
+// Connect to MongoDB Database and retrieve plans
+let planCollection;
+async function connectDB() {
+    try {
+        await client.connect();
+        planCollection = client.db("PlanDB").collection("PlanCollection");
+        console.log("Connected to MongoDB");
+    } catch (e) {
+        console.error("MongoDB Connection failed: " + e);
+        process.exit(1);
+    }
+}
 
 // Easy to update paths
 const PAGES = path.resolve("./html");
@@ -83,17 +102,20 @@ function requestScript(req, res) {
 
 async function requestData(req, res) {
     console.log(`Requested Data:   ${req.url}`);
-    let data;
 
     switch (req.url) {
         case "/api":
-            const response = await fetch("https://kevdev8.github.io/NoteForge/db.json");
-            data = await response.json();
+            planCollection.find({}).toArray().then(
+            (results) => {
+                res.writeHead(200, { "Content-Type" : "application/json" });
+                res.end(JSON.stringify(results));
+            }).catch(
+                (err) => {
+                    res.writeHead(500, { "Content-Type" : "application/json" });
+                    res.end(JSON.stringify({ error: "Failed to fetch the plans" }))
+                })
             break;
     }
-
-    res.writeHead(200, { "Content-Type" : "application/json" });
-    res.end(JSON.stringify(data));
 }
 
 
@@ -132,4 +154,6 @@ const server = http.createServer((req, res) => {
     else if (ALLOWEDREQUESTS.DATA.includes(req.url)) { requestData(req, res); }
     else if (ALLOWEDREQUESTS.PAGES.includes(req.url)) { requestPage(req, res); }
 });
-server.listen(PORT);
+
+// Check connection to database before starting the server
+connectDB().then(() => { server.listen(PORT, () => console.log(`Server is running on port ${PORT}`)); });
