@@ -26,7 +26,7 @@ async function getplans() {
 
     plans_container.removeChild(loading);
     
-    for (const plan of data.plans) {
+    for (const plan of data) {
         const card = document.createElement("div");
         card.classList.add("plan", "flex-card");
         
